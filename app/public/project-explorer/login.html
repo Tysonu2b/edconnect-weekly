@@ -3,18 +3,21 @@
     <head>
         <title>Welcome to My webpage</title>
         <link rel="stylesheet" href="bootstrap.min.css">
+       
     </head>
 <body>
-    <header>
-       <h1>Project Explorer</h1> 
-       <h2>One Stop Database for Academic Projects</h2>
-    </header>
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="search.html">Projects</a>
-        <a href="login.html">Login</a>
-        <a href="register.html">Register</a>
+    
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" href="index.html">Project Explorer</a> 
+        <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="text" placeholder="Search Project" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form> &nbsp;
         <a href="createproject.html">Submit</a> 
+      
+        <a href="register.html">Signup</a>
+        <a href="login.html">Login</a>
+        
     </nav>
     <main>
         <h1>Login</h1>
