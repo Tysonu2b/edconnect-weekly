@@ -5,36 +5,59 @@
         <link rel="stylesheet" href="/project-explorer/bootstrap.min.css">
     </head>
 <body>
-    <header>
-       <h1>Project Explorer</h1> 
-       <h2>One Stop Database for Academic Projects</h2>
-    </header>
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="search.html">Projects</a>
-        <a href="login.html">Login</a>
-        <a href="register.html">Register</a>
-        <a href="createproject.html">Submit</a> 
-    </nav>
+    <nav class="navbar bg-dark">
+      
+        <form class="form-inline my-2 my-lg-0">
+            <a class="navbar-brand">Project Explorer</a> 
+            <input class="form-control mr-sm-1" type="text" placeholder="Search Projects" value="Search Projects" aria-label="searchForm">
+            <button class="btn btn-outline-light mr-sm-2" type="submit">Search</button>
+            <a href="createproject.html">Submit</a>
+            
+          
+        </form>
+        <div class="form-inline">
+            <a class="nav-link" href="login.html">Login</a>
+            <a class="nav-link" href="register.html">Sign up</a>
+        </div>
+      
+       
+       
+        <!-- <ul class="navbar-nav mr-6">
+            <li class="nav-item">
+                <a class="nav-link" href="login.html">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="register.html">Sign up</a>
+            </li>
+        </ul> -->
+    
+    </nav> <br><br>
     <main>
-        <h2> Submit Project</h2> 
-        <form name="submitProject"> 
-        <label>Project Name:</label><br>
-        <input type="text" name="name"><br><br>
+       
+        <div class="mx-auto" style="width: 350px;">
+        <form class="form-group">
+        <h4> Submit Project</h4> 
+        <label class="form-label"> <small>Project Name</small></label>
+        <input class="form-control" type="text" placeholder="Enter project name"><br>
 
-        <label>Project Abstract:</label><br>
-        <textarea name="abstract">
+        <label class="form-label"><small>Project Abstract</small></label>
+        <textarea class="form-control" name="abstract">
 
-        </textarea > <br><br>
+        </textarea ><br>
 
-        <label>Authors:</label><br>
-        <input type="text" name="authors"><br><br>
+        <label class="form-label"><small>Author(s)</small></label>
+        <input class="form-control" type="text" placeholder="Enter author names (seperated by commas"><br>
 
-        <label>Tags(s):</label><br>
-        <input type="text" name="tags"><br><br>
+        <label class="form-label"><small>Tags(s)</small></label>
+        <input class="form-control form-group" type="text" placeholder="Use # to tag project with different topics (e.g #Javascript">
 
-        <input type="submit">
+        <button class="btn btn-primary">Continue</button>
+    
     </form>
+</div>
     </main>
+    <footer class="container p-3 bg-light">
+        <p>&copy; Company 2020</p>
+      </footer>
 </body>
 </html>
