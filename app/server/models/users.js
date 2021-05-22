@@ -60,7 +60,7 @@ class Users extends DataModel {
     }
 
     validate(obj) {
-        var valid = new this.errors[''];
+        var valid = new this.errors;
         var isValid = false;
         const userValue = Object.values(obj);
         for(val in userValue)

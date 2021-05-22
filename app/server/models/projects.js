@@ -13,7 +13,43 @@ class Project {
 
 class Projects extends DataModel {
     validate(obj) {
-        
+        var newArr = [id, this.name, abstract, abstract,createdBy]
+        var projectError = new this.errors;
+        var passValidation;
+        if(!Array.isArray(authors))
+        {
+            projectError.push("Authors should be an array");
+            passValidation = false;
+
+        }
+        else
+            passValidation = true;
+
+
+        if(!Array.isArray(tag))
+        {
+            projectError.push("Tags should be an array");
+            passValidation = false;
+
+        }
+
+        else
+            passValidation = true;
+
+        for(let i=0; i<newArr.length; i++)
+        {
+            if(newArr[i]===null)
+            {
+                projectError.push(newArr[i] + " should not be empty");
+                passValidation = false;
+            }
+            else
+                passValidation = true;
+
+        }
+
+        return passValidation;
+
     }
 }
 
