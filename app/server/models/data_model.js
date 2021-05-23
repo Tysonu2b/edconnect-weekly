@@ -12,12 +12,12 @@ class DataModel {
 
         for(let i=0; i<this.data.length; i++)
         {
-            if(this.data[i].id == id)
+            if(this.data[i].id === id)
             {
                 return this.data[i];
             }
             else
-                return null;
+                return null
         }
 
 
@@ -32,19 +32,21 @@ class DataModel {
     }
 
     update(obj, id) {
-        let userExist = false;
+        let userExist;
         for(let i=0; i<this.data.length; i++)
         {
-            if(this.data[i].id==id)
+            if(this.data[i].id == id)
             {
-                this.data[i].firstname = firstname;
-                this.data[i].lastname = lastname;
-                this.data[i].email = email;
-                this.data[i].password = password;
-                this.data[i].matricNumber = matricNumber;
-                this.data[i].program = program;
-                this.data[i].graduationYear = graduationYear;
+                
+                this.data[i].firstname = obj.firstname;
+                this.data[i].lastname = obj.lastname;
+                this.data[i].email = obj.email;
+                this.data[i].password = obj.password;
+                this.data[i].matricNumber = obj.matricNumber;
+                this.data[i].program = obj.program;
+                this.data[i].graduationYear = obj.graduationYear;
                 userExist = true
+                
             }
             else
                 userExist = false;
@@ -57,11 +59,11 @@ class DataModel {
         let userDeleted = false
         for(let i=0; i<this.data.length; i++)
         {
-            if(this.data[i].id == id)
+            if(this.data[i].id === id)
             {
                 let ind = this.data.indexOf(this.data[i]);
                 this.data.splice(ind, 1);
-                userDeleted = true;
+                userDeleted = true
             }
             else
                 userDeleted = false;

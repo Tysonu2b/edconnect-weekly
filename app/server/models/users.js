@@ -9,34 +9,28 @@ class User {
         this.password = password;
         this.matricNumber = matricNumber;
         this.program = program;
-        this.graduationYear = graduationYear;
+        this.graduationYear = graduationYear
     }
 
     getFullName() {
 
-       var fullName = this.firstname +" "+ this.lastname;
-       return fullName;
+       return this.firstname + " " + this.lastname;
 
     }
 }
 
 class Users extends DataModel {
     authenticate(email, password) {
-        for(let i=0; i<this.data.length; i++)
-        {
-            if(this.data[i].email===email && this.data[i].password===password)
-            {
-                return true;
-            }
-            else
-                return false;
-        }
+
+        var authUser = this.data.forEach((val) => val.email === email && val.password === password);
+        
+        return authUser;
     }
 
     getByEmail(email) {
         for(let i=0; i<this.data.length; i++)
         {
-            if(this.data[i].email===email)
+            if(this.data[i].email === email)
             {
                 return this.data[i];
             }
@@ -47,9 +41,9 @@ class Users extends DataModel {
     }
 
     getByMatricNumber(matricNumber) {
-        for(let i=0; i<this.data.length; i++)
+        for(let i = 0; i<this.data.length; i++)
         {
-            if(this.data[i].matricNumber===matricNumber)
+            if(this.data[i].matricNumber === matricNumber)
             {
                 return this.data[i];
             }
@@ -60,89 +54,32 @@ class Users extends DataModel {
     }
 
     validate(obj) {
-        var valid = new this.errors;
-        var isValid = false;
-        const userValue = Object.values(obj);
-        for(val in userValue)
-        {
-            if(val===null)
+        this.errors = [];
+        var check = Object.keys(obj).forEach((objKey) =>{
+            if(obj[objKey] === null|| obj[objKey] === "")
             {
-                isValid = false;
-                let err = val + " field should not be empty";
-                valid.push(err);
-                return err;
-
+                this.errors.push(`${objKey} should not be empty.`);
+                return false
             }
             else
-                isValid = true;
+                return true
+        });
 
-        }
-
-        for(let i=0; i<this.data.length; i++)
-        {
-            if(obj.email===this.data[i].email)
+        var doesEmailExist = this.data.forEach((objVal) => objVal.email === obj.email);   //doesEmailExist returns a true if the email 
+        if(doesEmailExist === true)
             {
-                isValid = true;
-                let err = "A user with specified email address already exists";
-                return err;
+                this.errors.push("A user with specified email address already exists");
             }
-            else 
-                isValid = true
-        }
 
-       
-        if(obj.password.length<7)
+        var isCorrectPasswordLength = obj.password.length >= 7;
+
+        if(isCorrectPasswordLength === true)
             {
-                isValid = false;
-                let err = "Password should have at least 7 characters";
-                return err;
+                this.errors.push("Password should have at least 7 characters");
             }
-        
-        return isValid
-       
-
-
-        // if(obj.lastname===null)
-        // {
-        //     var err = "Last name field should not be empty";
-        //     this.errors.push(err);
-        //     return err;
-        // }
-
-        // else if(obj.firstname===null)
-        // {
-        //     var err = "First name should not be empty";
-        //     this.errors.push(err);
-        //     return err;
-        // }
-
-        // else if(obj.matricNumber===null)
-        // {
-        //     var err = "Matric number should not be empty";
-        //     this.errors.push(err);
-        //     return err;
-        // }
-
-        // else if(obj.email===null)
-        // {
-        //     var err = "Email should not be empty";
-        //     this.errors.push(err);
-        //     return err;
-        // }
-
-        // else if(obj.program===null)
-        // {
-        //     var err = "Program should not be empty";
-        //     this.errors.push(err);
-        //     return err;
-        // }
-
-        // else(obj.graduationYear===null)
-        // {
-        //     var err = "Graduation year should not be empty";
-        //     this.errors.push(err);
-        //     return err;
-        // }
+            
+         return (check && doesEmailExist && isCorrectPasswordLength)? true: false
+                    
     }
 }
 

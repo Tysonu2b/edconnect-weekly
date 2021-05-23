@@ -13,42 +13,44 @@ class Project {
 
 class Projects extends DataModel {
     validate(obj) {
-        var newArr = [id, this.name, abstract, abstract,createdBy]
-        var projectError = new this.errors;
-        var passValidation;
-        if(!Array.isArray(authors))
+        this.errors = [];
+        var otherValidation;
+        var isAuthorPropArray;           //This will be true if the datatype of author is an array or false if not
+        var isTagPropArray;
+
+        if(!Array.isArray(obj.authors))
         {
-            projectError.push("Authors should be an array");
-            passValidation = false;
+            this.errors.push("Authors should be an array");
+            isAuthorPropArray = false;
 
         }
         else
-            passValidation = true;
+            isAuthorPropArray = true;
 
 
-        if(!Array.isArray(tag))
+        if(!Array.isArray(obj.tag))
         {
-            projectError.push("Tags should be an array");
-            passValidation = false;
+            this.errors.push("Tags should be an array");
+            isTagPropArray = false;
 
         }
 
         else
-            passValidation = true;
+            isTagPropArray = true;
 
-        for(let i=0; i<newArr.length; i++)
+
+        for(const objKey in obj)
         {
-            if(newArr[i]===null)
+            if(obj[objKey] === null || obj[objKey] === "" || obj[objKey] === "undefined")
             {
-                projectError.push(newArr[i] + " should not be empty");
-                passValidation = false;
+                this.errors.push(obj[objKey] + " should not be empty");
+                otherValidation = false;
             }
             else
-                passValidation = true;
-
+                otherValidation = true;
         }
 
-        return passValidation;
+        return isTagPropArray && isAuthorPropArray && otherValidation;
 
     }
 }
