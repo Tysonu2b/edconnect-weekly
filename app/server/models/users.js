@@ -21,11 +21,17 @@ class User {
 
 class Users extends DataModel {
     authenticate(email, password) {
-
-        var authUser = this.data.forEach((val) => val.email === email && val.password === password);
+        var authUser = false;
+        var checkUserDetails = this.data.forEach((val) => {
         
-        return authUser;
-    }
+        if(val.email === email && val.password === password)
+        {
+            authUser = true;
+        } 
+    });
+
+        return authUser
+}
 
     getByEmail(email) {
         for(let i=0; i<this.data.length; i++)
@@ -46,6 +52,7 @@ class Users extends DataModel {
             if(this.data[i].matricNumber === matricNumber)
             {
                 return this.data[i];
+                break;
             }
             else
                 return null;
@@ -55,30 +62,50 @@ class Users extends DataModel {
 
     validate(obj) {
         this.errors = [];
-        var check = Object.keys(obj).forEach((objKey) =>{
-            if(obj[objKey] === null|| obj[objKey] === "")
+        let check = true;
+    
+        for(let objKey in obj)
+    {
+        if(obj[objKey] === null || obj[objKey] === "")
             {
                 this.errors.push(`${objKey} should not be empty.`);
-                return false
+                check = false;
             }
-            else
-                return true
+
+    }
+
+        var doesEmailExist = this.data.forEach((objVal) => 
+        {
+
+            if(objVal.email === obj.email)
+                {
+                    this.errors.push("A user with specified email address already exists");
+                    check = false;
+                }
+            
+    
         });
+       
+        var duplicateMatricNumber = this.data.forEach((objVal) => 
+        {
 
-        var doesEmailExist = this.data.forEach((objVal) => objVal.email === obj.email);   //doesEmailExist returns a true if the email 
-        if(doesEmailExist === true)
-            {
-                this.errors.push("A user with specified email address already exists");
-            }
-
+            if(objVal.matricNumber === obj.matricNumber)
+                {
+                    this.errors.push("A user with specified matric number already exists");
+                    check = false;
+                }
+            
+    
+        });
+       
         var isCorrectPasswordLength = obj.password.length >= 7;
-
-        if(isCorrectPasswordLength === true)
+        if(isCorrectPasswordLength === false)
             {
                 this.errors.push("Password should have at least 7 characters");
+                check = false;
             }
             
-         return (check && doesEmailExist && isCorrectPasswordLength)? true: false
+         return check;
                     
     }
 }

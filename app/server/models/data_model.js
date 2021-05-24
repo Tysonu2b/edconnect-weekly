@@ -32,27 +32,16 @@ class DataModel {
     }
 
     update(obj, id) {
-        let userExist;
-        for(let i=0; i<this.data.length; i++)
-        {
-            if(this.data[i].id == id)
-            {
-                
-                this.data[i].firstname = obj.firstname;
-                this.data[i].lastname = obj.lastname;
-                this.data[i].email = obj.email;
-                this.data[i].password = obj.password;
-                this.data[i].matricNumber = obj.matricNumber;
-                this.data[i].program = obj.program;
-                this.data[i].graduationYear = obj.graduationYear;
-                userExist = true
-                
-            }
-            else
-                userExist = false;
-
-        }
-        return userExist;
+               
+                for (let key in obj) {
+                    let userDataFromDataArray = this.data.find(userData => userData.id == id);
+                    if (userDataFromDataArray.length == 0) {
+                        return false;
+                    } else {
+                        userDataFromDataArray[key] = obj[key];
+                    }
+                }
+                return true;
     }
 
     delete(id) {

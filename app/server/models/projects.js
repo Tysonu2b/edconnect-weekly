@@ -14,43 +14,31 @@ class Project {
 class Projects extends DataModel {
     validate(obj) {
         this.errors = [];
-        var otherValidation;
-        var isAuthorPropArray;           //This will be true if the datatype of author is an array or false if not
-        var isTagPropArray;
+        var validationCheck = true;
 
         if(!Array.isArray(obj.authors))
         {
             this.errors.push("Authors should be an array");
-            isAuthorPropArray = false;
-
+            validationCheck = false;
         }
-        else
-            isAuthorPropArray = true;
 
 
-        if(!Array.isArray(obj.tag))
+        if(!Array.isArray(obj.tags))
         {
             this.errors.push("Tags should be an array");
-            isTagPropArray = false;
-
+            validationCheck = false;
         }
-
-        else
-            isTagPropArray = true;
-
 
         for(const objKey in obj)
         {
             if(obj[objKey] === null || obj[objKey] === "" || obj[objKey] === "undefined")
             {
                 this.errors.push(obj[objKey] + " should not be empty");
-                otherValidation = false;
+                validationCheck = false;
             }
-            else
-                otherValidation = true;
         }
 
-        return isTagPropArray && isAuthorPropArray && otherValidation;
+        return validationCheck;
 
     }
 }
