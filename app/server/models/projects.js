@@ -31,7 +31,7 @@ class Projects extends DataModel {
 
         for(const objKey in obj)
         {
-            if(obj[objKey] === null || obj[objKey] === " " || obj[objKey] === "undefined" || obj[objKey] === [])
+            if(obj[objKey] === null || obj[objKey] === '' || obj[objKey] === "undefined" || obj[objKey] === [])
             {
                 this.errors.push(obj[objKey] + " should not be empty");
                 validationCheck = false;
