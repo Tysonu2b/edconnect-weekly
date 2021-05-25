@@ -10,15 +10,16 @@ class DataModel {
 
     getById(id) {
 
-        for(let i=0; i<this.data.length; i++)
+         for(let i=0; i<this.data.length; i++)
         {
             if(this.data[i].id === id)
             {
                 return this.data[i];
+                break;
             }
-            else
-                return null
+                
         }
+        return null
 
 
     }
