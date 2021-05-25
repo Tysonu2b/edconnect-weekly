@@ -20,8 +20,6 @@ class DataModel {
                 
         }
         return null
-
-
     }
 
     save(obj) {
