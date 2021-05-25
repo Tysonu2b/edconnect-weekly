@@ -15,28 +15,47 @@ class Projects extends DataModel {
     validate(obj) {
         this.errors = [];
         var validationCheck = true;
-
-        if(!Array.isArray(obj.authors))
+        for(let objKey in obj)
         {
-            this.errors.push("Authors should be an array");
-            validationCheck = false;
-        }
-
-
-        if(!Array.isArray(obj.tags))
-        {
-            this.errors.push("Tags should be an array");
-            validationCheck = false;
-        }
-
-        for(const objKey in obj)
-        {
-            if(obj[objKey] === null || obj[objKey] === '' || obj[objKey] === "undefined" || obj[objKey] === [])
-            {
-                this.errors.push(obj[objKey] + " should not be empty");
+            if(objKey == 'authors' && !Array.isArray(obj[objKey]))
+            {              
                 validationCheck = false;
+                this.errors.push("Authors should be an array");
             }
+           
+            else if(objKey == 'tags' && !Array.isArray(obj[objKey]))
+            {
+                validationCheck = false
+                this.errors.push("Tags should be an array");
+            }
+
+            else 
+                if(obj[objKey] === null || obj[objKey] === '' || obj[objKey] === [])
+                {
+                    this.errors.push(objKey + " should not be empty");
+                    validationCheck = false;
+                
+                }
         }
+        // if(!Array.isArray(obj.authors))
+        // {
+        //     this.errors.push("Authors should be an array");
+        //     validationCheck = false;
+        // }
+        // if(!Array.isArray(obj.tags))
+        // {
+        //     this.errors.push("Tags should be an array");
+        //     validationCheck = false;
+        // }
+
+        // for(const objKey in obj)
+        // {
+        //     if(obj[objKey] === null || obj[objKey] === '' || obj[objKey] === "undefined" || obj[objKey] === [])
+        //     {
+        //         this.errors.push(objKey + " should not be empty");
+        //         validationCheck = false;
+        //     }
+        // }
 
         return validationCheck;
 
