@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Welcome to My webpage</title>
+        <link rel="stylesheet" href="/project-explorer/bootstrap.min.css"> 
+    </head>
+<body>
+    
+    <nav class="navbar bg-dark">
+        <form class="form-inline my-2 my-lg-0">
+              <a class="navbar-brand">Project Explorer</a> 
+              <input class="form-control mr-sm-1" type="text" placeholder="Search Projects" aria-label="searchForm">
+              <button class="btn btn-outline-light mr-sm-2" type="submit">Search</button>
+              <a href="createproject.html">Submit</a>
+          </form>
+          <div class="form-inline">
+              <a class="nav-link" href="login.html">Login</a>
+              <a class="nav-link" href="register.html">Sign up</a>
+          </div>
+        
+         
+         
+          <!-- <ul class="navbar-nav mr-6">
+              <li class="nav-item">
+                  <a class="nav-link" href="login.html">Login</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="register.html">Sign up</a>
+              </li>
+          </ul> -->
+      
+      </nav> <br><br>
+  
+    <main>
+       
+        
+        <p class="container"><strong>Edesiri Ovwori</strong> ovworiedesiri@gmail.com</p>
+        <div class="container bg-light p-3">   
+        <div class="row">
+            <div class="col-md-4">
+                <h7> Program </h7> <br>
+                <h7> Computer Information Science </h7>
+            </div>
+
+            <div class="col-md-4">
+                <h7> Matriculation Number </h7><br>
+                <h7> DSPT/COE/1213/12733 </h7>
+            </div>
+
+            <div class="col-md-4">
+                <h7> Year </h7> <br>
+                <h7> 2014 </h7>
+            </div>
+            </div>
+            
+        </div>
+     </div> <br>
+            <h5 class="container">Update Profile</h5>
+            <hr>
+        <section>
+            <form class= "form-group ">
+                    <div class="form-row mx-auto w-90" style="width: 600px">
+                    <div class=" form-group col-md-6">
+                        <label class="form-label">First Name: </label>
+                        <input class="form-control" type="text" name="firstName">
+                    </div>
+                     <div class="form-group col-md-6">
+                        <label>Last Name:</label>
+                         <input class="form-control" type="text" name="lastName">
+                    </div> 
+
+                    <div class="form-group col-md-6">
+                        <label class="form-label">Email:</label>
+                        <input class="form-control" type="email" name="email"> 
+                    </div>
+                    
+                    <div class="form-group col-md-6">
+                        <label class="form-label">Program:</label>
+                        <select class="form-control" value="Computer Science" name="program">
+                            <option value="computer_science">Computer Science</option>
+                            <option value="computer_information_systems">Computer Information Systems</option>
+                            <option value="computer_technology">Computer Technology</option>
+                        </select>
+                    </div> <br><br>
+
+                    <div class="form-group col-md-6">
+                        <label>Matric Number:</label>
+                        <input class="form-control" type="text" name="matricNumber">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="form-label">Graduation Year:</label>
+                        <select class="form-control" name="graduationYear">
+                            <option value="2013">2013</option>
+                            <option value="2014">2014</option>
+                            <option value="2015">2015</option>
+                            <option value="2016">2016</option>
+                            <option value="2017">2017</option>
+                            <option value="2018">2018</option>
+                            <option value="2019">2019</option>
+                            <option value="2020">2020</option>
+                        </select>
+                    </div><br><br>
+                               
+                <button class="btn btn-primary" type="submit">Update Profile</button>
+            </div>
+            </form>
+        </section> <br>
+
+        <div class="container">
+        <h5>Change Password</h5>
+        <hr>
+        </div>
+
+        <form class="form-group mx-auto w-90" style="width: 600px" name="changePassword">
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label class="form-label">Current Password </label>
+                    <input class="form-group form-control" type="password" name="currentPassword" placeholder="Current Password">
+                </div>
+                <div class="form-group col-md-4">
+                    <label class="form-label">New Password </label>
+                    <input class="form-group form-control" type="password" name="confirmPassword" placeholder="Your new password">
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label class="form-label">Confirm Password</label>
+                    <input class="form-control" type="password" name="newPassword" placeholder="Confirm new password" >
+                </div>
+                <button class="btn btn-primary">Change Password</button>
+            </div>
+        </form>
+                  
+    </main>
+    <footer class="container p-3 bg-light">
+        <p>&copy; Company 2020</p>
+      </footer>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Welcome to My webpage</title>
+        <link rel="stylesheet" href="/project-explorer/bootstrap.min.css">
+    </head>
+<body>
+   
+    <nav class="navbar bg-dark">
+      
+        <form class="form-inline my-2 my-lg-0">
+            <a class="navbar-brand">Project Explorer</a> 
+            <input class="form-control mr-sm-1" type="text" placeholder="Search Projects" value="Search Projects" aria-label="searchForm">
+            <button class="btn btn-outline-light mr-sm-2" type="submit">Search</button>
+            <a href="createproject.html">Submit</a>
+            
+          
+        </form>
+        <div class="form-inline">
+            <a class="nav-link" href="login.html">Login</a>
+            <a class="nav-link" href="register.html">Sign up</a>
+        </div>
+      
+       
+       
+        <!-- <ul class="navbar-nav mr-6">
+            <li class="nav-item">
+                <a class="nav-link" href="login.html">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="register.html">Sign up</a>
+            </li>
+        </ul> -->
+    
+    </nav><br><br>
+    
+    <main>
+        <p class="container"><b>Project Gallery</b></p>
+        <div class="container bg-light p-3">
+        <form >
+        <div class="form-row">
+            <div class="col-md-6">
+            <input name="searchTerm" class = "form-control-lg form-control" type="text" placeholder="Project Name, Authors, Abstract, Tags" >
+            </div>
+
+            <div class="col-md-2">
+            <label class="form-label form-control">Search by</label>
+            </div>
+            <div class="col-md-2"> 
+            <select class="form-control" name="searchType">
+                <option value="Name">Name</option> 
+                <option value="Abstract">Abstract</option>
+                <option value="Authors">Authors</option>
+                <option value="Tags">Tags</option> 
+            </select>
+            </div>
+         
+            <div class="col-md-2">
+            <button type="submit" class="btn btn-lg btn-primary" value="Search">Submit</button>
+            </div>
+        </div>
+
+        </form>
+        </div> <br><br>
+        <section>
+            <div class="container">
+                <p><b>All Project</b> <small>(0 results)</small></p>
+                <div class="form-row">
+                    <div class="col-md-3">
+                    <p> Project 1</p>
+                    <p>Description: Lorem ipsum dolor sit ame, consectetur
+                        adipscing elit, sed do eiusmod tempor incididunt ut 
+                        labore. Program: Computer Science
+                    </p>
+                    </div>
+
+                    <div class="col-md-3">
+                    <p>Project 2</p>
+                    <p>Description: Lorem ipsum dolor sit ame, consectetur
+                        adipscing elit, sed do eiusmod tempor incididunt ut 
+                        labore. Program: Computer Science
+                    </p>
+                    </div>
+             </div>
+        </div>
+        </section>
+
+     
+
+       
+    </main>
+
+    <footer class="container p-3 bg-light">
+        <p>&copy; Company 2020</p>
+      </footer>
+</body>
+</html>

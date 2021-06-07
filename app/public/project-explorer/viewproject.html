@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Welcome to My webpage</title>
+        <link rel="stylesheet" href="/project-explorer/bootstrap.min.css">
+    </head>
+<body>
+    <nav class="navbar bg-dark">
+      
+        <form class="form-inline my-2 my-lg-0">
+            <a class="navbar-brand">Project Explorer</a> 
+            <input class="form-control mr-sm-1" type="text" placeholder="Search Projects" value="Search Projects" aria-label="searchForm">
+            <button class="btn btn-outline-light mr-sm-2" type="submit">Search</button>
+            <a href="createproject.html">Submit</a>
+            
+          
+        </form>
+        <div class="form-inline">
+            <a class="nav-link" href="login.html">Login</a>
+            <a class="nav-link" href="register.html">Sign up</a>
+        </div>
+      
+       
+       
+        <!-- <ul class="navbar-nav mr-6">
+            <li class="nav-item">
+                <a class="nav-link" href="login.html">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="register.html">Sign up</a>
+            </li>
+        </ul> -->
+    
+    </nav> <br>
+    <main>
+
+        <section>
+            <h5 class="container">Project 1</h5>      
+            <div class="container bg-light p-3">  
+                    <div class="row">
+                        <div class="col-md-3">
+                            <h7> Created by</h7> <br>
+                            <h7> Ade Chris</h7>
+                        </div>
+            
+                        <div class="col-md-3">
+                            <h7> Date Created </h7><br>
+                            <h7> 2020-08-30 </h7>
+                        </div>
+            
+                        <div class="col-md-3">
+                            <h7> Last Updated </h7> <br>
+                            <h7> 2020-08-30 </h7>
+                        </div>
+                        <div class="col-md-3 d-flex justify-content-end">
+                        <a  href="editproject.html" class="btn btn-primary">Edit Project</button>
+                        </div>
+                        </div>
+           </div>
+        </section> <br>
+
+        <div class="container">
+        <form class="form-group" name="editProject">
+        
+        <div class="row mx-auto">
+        <div class="col-md-6">
+        <strong> Project Abstract </strong>
+        <hr> 
+        <p>Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print,
+            graphic or web designs. The passage is attributed to an unknown typesetter in the 15th
+            century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for
+            use in a type specimen book.
+        </p>
+
+        <label class="form-label"><small>Comments</small></label>
+        <textarea class="form-control" type="text" placeholder="Leave a comment" name="abstract">
+        
+        </textarea > <br>
+
+        <button class="btn btn-primary">Submit</button>
+        <hr>
+       <p style="text-align: center;">No comment added yet </p>
+        </div> 
+        
+        <div class="col-md-6">
+
+            <strong>Project Details</strong>
+                <hr>
+            <div class="card">
+                <div class="card-header">
+                    Author(s)
+                </div>
+                <div class="card-body">
+                  <!-- <h5 class="card-title">Special title treatment</h5> -->
+                  <p class="card-text">Ade Chris</p>
+                <div class="card-footer"><a href="#">#web</a></div>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-header">
+                    Project Files
+                </div>
+                <div class="card-body">
+                  <!-- <h5 class="card-title">Special title treatment</h5> -->
+                  <p class="card-text">No files Uploaded yet</p>
+                
+                </div>
+              </div>
+       
+       
+        </div>
+        </div>
+        
+    </form>
+</div>
+  
+    </main>
+    <footer class="container p-3 bg-light">
+        <p>&copy; Company 2020</p>
+      </footer>
+</body>
+</html>
