@@ -37,26 +37,7 @@ class Projects extends DataModel {
                 
                 }
         }
-        // if(!Array.isArray(obj.authors))
-        // {
-        //     this.errors.push("Authors should be an array");
-        //     validationCheck = false;
-        // }
-        // if(!Array.isArray(obj.tags))
-        // {
-        //     this.errors.push("Tags should be an array");
-        //     validationCheck = false;
-        // }
-
-        // for(const objKey in obj)
-        // {
-        //     if(obj[objKey] === null || obj[objKey] === '' || obj[objKey] === "undefined" || obj[objKey] === [])
-        //     {
-        //         this.errors.push(objKey + " should not be empty");
-        //         validationCheck = false;
-        //     }
-        // }
-
+       
         return validationCheck;
 
     }
