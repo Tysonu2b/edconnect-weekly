@@ -134,11 +134,11 @@ async function updateNavbar()
 
 }
 //update navbar on windows load
-window.onload = updateNavbar();
+//window.onload = updateNavbar();
 
 async function loginUser(){
     let loginForm = document.getElementById('loginForm');
-    loginForm.addEventListener('click', event => {
+    loginForm.addEventListener('submit', event => {
         event.preventDefault();
         let logObj = {
             "email":  document.getElementById('email').value,
@@ -206,6 +206,22 @@ async function submitProject(){
     })
 }
 
+function redirectToLogin() {
+    let uid = '';
+    document.cookie
+    .split(';')
+    .filter(row => {
+        if(row.startsWith('uid=')){
+         uid = row.split('=')[1];
+        }})
+        console.log(uid)
+    
+    if(uid == ''){
+        window.location.href = 'login.html';
+    }else{
+        submitProject();
+    }
+}
 
 
 
@@ -217,4 +233,8 @@ if (window.location.href.includes('register.html')) {
 
 if (window.location.href.includes('login.html')) {
     loginUser()
+}
+
+if (window.location.href.includes('createproject.html')) {
+    redirectToLogin()
 }
