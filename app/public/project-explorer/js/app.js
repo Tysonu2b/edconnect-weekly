@@ -45,7 +45,7 @@ async function signupUser()
     event.preventDefault();
     
     let formObj = {
-    firstName: document.getElementById("firstname").value,
+    firstName: document.getElementById("firstName").value,
     lastName: document.getElementById("lastName").value,
     email: document.getElementById("email").value,
     password: document.getElementById("password").value,
