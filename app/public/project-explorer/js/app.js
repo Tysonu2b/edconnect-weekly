@@ -45,7 +45,7 @@ async function signupUser()
     event.preventDefault();
     
     let formObj = {
-    firstName: document.getElementById("username").value,
+    firstName: document.getElementById("firstname").value,
     lastName: document.getElementById("lastName").value,
     email: document.getElementById("email").value,
     password: document.getElementById("password").value,
@@ -119,7 +119,7 @@ async function updateNavbar()
         }).then(response =>{
             return response.json()
         }).then(data => {
-            let firstNameEl = document.getElementById("userFirstName")
+            let firstNameEl = document.getElementById("username")
             let logOutEl = document.getElementById("logout")
             logOutEl.innerHTML = "Logout"
             firstNameEl.innerHTML = "Hi " + data.firstname;
