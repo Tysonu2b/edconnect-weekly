@@ -1,3 +1,5 @@
+const { response } = require("express");
+
 async function getPrograms()
 {
 let listOfProgram = document.getElementById("program") //A click event will be attached to this variable.
@@ -73,7 +75,7 @@ async function signupUser()
             console.log(responseData)
             let err = responseData.errors;
             let errorDiv = document.getElementById('error-alert');
-            errorDiv.classList.add('alert-danger');
+            errorDiv.classList.add('alert alert-danger');
             for(let i = 0; i < err.length; i++) {
                 let errP = document.createElement('p');     
                 errP.innerText = err[i];          
@@ -151,21 +153,21 @@ async function loginUser(){
             method: 'POST',
             body: JSON.stringify(logObj)
         }).then(response => {
-            return response.json();
-        }).then(responseData =>{
-            console.log(responseData)
-            if(responseData.status === "ok")
-            {   
-                let uid = responseData.id;
-                setCookie(uid, 7);
-                window.location.href = 'index.html';
+            if(response.ok)
+            {
+                return respone.json()
             }
             let loginErrorsEl = document.getElementById('login-error');             
             var newErrorEl = document.createElement('p');
             newErrorEl.textContent = "Email or Password incorrect";
             loginErrorsEl.appendChild(newErrorEl)
+        
+        }).then(responseData =>{
+            let uid = responseData.data.id;
+            setCookie(uid, 7);
+            window.location.href = 'index.html';
         })
-    })
+ })
 }
 
 async function submitProject(){
