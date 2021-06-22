@@ -147,7 +147,7 @@ async function loginUser(){
 
         fetch('/api/login', 
         {
-            headers: {'Content-Type': '/application/json'},
+            headers: {'Content-Type':'/application/json'},
             method: 'POST',
             body: JSON.stringify(logObj)
         }).then(response => {
@@ -161,7 +161,7 @@ async function loginUser(){
             loginErrorsEl.appendChild(newErrorEl)
         
         }).then(responseData =>{
-            let uid = responseData.data.id;
+            let uid = responseData.id;
             setCookie(uid, 7);
             window.location.href = 'index.html';
         })
