@@ -73,7 +73,7 @@ async function signupUser()
             console.log(responseData)
             let err = responseData.errors;
             let errorDiv = document.getElementById('error-alert');
-            errorDiv.classList.add('alert alert-danger');
+            errorDiv.classList.add('alert-danger');
             for(let i = 0; i < err.length; i++) {
                 let errP = document.createElement('p');     
                 errP.innerText = err[i];          
