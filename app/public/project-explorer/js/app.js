@@ -1,5 +1,3 @@
-const { response } = require("express");
-
 async function getPrograms()
 {
 let listOfProgram = document.getElementById("program") //A click event will be attached to this variable.
