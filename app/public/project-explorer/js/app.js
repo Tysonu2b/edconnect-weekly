@@ -147,13 +147,13 @@ async function loginUser(){
 
         fetch('/api/login', 
         {
-            headers: {'Content-Type':'/application/json'},
+            headers: {'Content-Type':'application/json'},
             method: 'POST',
             body: JSON.stringify(logObj)
         }).then(response => {
             if(response.ok)
             {
-                return respone.json()
+                return response.json()
             }
             let loginErrorsEl = document.getElementById('login-error');             
             var newErrorEl = document.createElement('p');
