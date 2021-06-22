@@ -147,7 +147,7 @@ async function loginUser(){
 
         fetch('/api/login', 
         {
-            header: {'Content-Type': '/application/json'},
+            headers: {'Content-Type': '/application/json'},
             method: 'POST',
             body: JSON.stringify(logObj)
         }).then(response => {
@@ -181,7 +181,7 @@ async function submitProject(){
         }
 
         fetch("/api/project", {
-            header: {
+            headers: {
                 'Content-Type':'application/json'
             },
             method: 'POST',
