@@ -110,27 +110,30 @@ async function updateNavbar()
     })
 
     if(uid !== ""){
-        let url = "api/users/"+uid
+        let url = "api/users/"+uid;
+        console.log(url);
         await fetch(url, {
             headers : {
                 'Content-Type':'application/json'
             },
             method: 'GET'
         }).then(response =>{
-            return response.json()
-        }).then(data => {
-            let firstNameEl = document.getElementById("username")
-            let logOutEl = document.getElementById("logout")
-            logOutEl.innerHTML = "Logout"
-            firstNameEl.innerHTML = "Hi " + data.firstname;
-            firstNameEl.href = '#';
-            logoutEl.addEventListener('click', e =>{
-                e.preventDefault()
-                document.cookie = "" //clear the cookie
-                window.location.href = 'index.html';
-            })
+            return response.json();
+        }).then(datas => {
+            console.log(datas)
+            let firstNameEl = document.querySelector("username");
+            let logOutEl = document.querySelector("logout");
+            logOutEl.innerHTML = "Logout";
+            firstNameEl.innerText = "Hi how are you?";
+            // logoutEl.addEventListener('click', e =>{
+            //     e.preventDefault()
+            //     document.cookie = "" //clear the cookie
+            //     window.location.href = 'index.html';
+            // })
         })
     }
+    let firstNameEl = document.querySelector("username");
+    firstNameEl.innerText = "Hi how are you?";
 
 }
 //update navbar on windows load
@@ -237,4 +240,8 @@ if (window.location.href.includes('login.html')) {
 
 if (window.location.href.includes('createproject.html')) {
     redirectToLogin()
+}
+
+if (window.location.href.includes('login.html')) {
+    window.onload = updateNavbar();
 }
