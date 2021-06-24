@@ -119,12 +119,13 @@ async function updateNavbar()
             method: 'GET'
         }).then(response =>{
             return response.json();
-        }).then(datas => {
-            console.log(datas)
-            let firstNameEl = document.querySelector("username");
-            let logOutEl = document.querySelector("logout");
-            logOutEl.innerHTML = "Logout";
-            firstNameEl.innerText = "Hi how are you?";
+        }).then(responseData => {
+            let userFirstname = responseData.data.firstname;
+            let firstNameEl = document.getElementById("username");
+            firstNameEl.innerHTML = "Hi" + userFirstname;
+
+            //let logOutEl = document.querySelector("logout");
+            // logOutEl.innerHTML = "Logout";
             // logoutEl.addEventListener('click', e =>{
             //     e.preventDefault()
             //     document.cookie = "" //clear the cookie
@@ -132,13 +133,9 @@ async function updateNavbar()
             // })
         })
     }
-    let firstNameEl = document.querySelector("username");
-    firstNameEl.innerText = "Hi how are you?";
-
 }
-//update navbar on windows load
-//window.onload = updateNavbar();
 
+//login user
 async function loginUser(){
     let loginForm = document.getElementById('loginForm');
     loginForm.addEventListener('submit', event => {
@@ -171,6 +168,7 @@ async function loginUser(){
  })
 }
 
+//submit Project
 async function submitProject(){
     let projectFormEl = document.getElementById("createProjectForm")
     projectFormEl.addEventListener("click", event =>{
