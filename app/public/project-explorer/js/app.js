@@ -163,6 +163,7 @@ async function loginUser(){
         }).then(responseData =>{
             let uid = responseData.id;
             setCookie(uid, 7);
+            console.log(responseData);
             window.location.href = 'index.html';
         })
  })
