@@ -64,7 +64,6 @@ async function signupUser()
     .then(responseData => {
         if(responseData.status === 'ok')
         {
-            console.log(responseData)
             let userId = responseData.data.id;
             setCookie(userId, 5);
             window.location.href = 'index.html';
@@ -99,17 +98,17 @@ function setCookie(cvalue,exdays) {
 //the index page with logout and 'Hi {firstname}'
 async function updateNavbar()
 {
-    let uid = "";
+    let uid="";
     document.cookie
     .split(";")
     .forEach(userId =>{
-        if(userId.startsWith("uid="))
+        if(userId.startsWith("uid"))
         {
             uid = userId.split("=")[1];
         }
     })
 
-    if(uid !== ""){
+    if(uid !==null){
         let url = "api/users/"+uid;
         console.log(url);
         await fetch(url, {
@@ -135,14 +134,16 @@ async function updateNavbar()
     }
 }
 
-//login user
-async function loginUser(){
+
+
+// //login user
+function loginUser(){
     let loginForm = document.getElementById('loginForm');
     loginForm.addEventListener('submit', event => {
         event.preventDefault();
         let logObj = {
-            "email":  document.getElementById('email').value,
-            "password": document.getElementById('password').value,
+            email:  document.getElementById('email').value,
+            password: document.getElementById('password').value,
         }
 
         fetch('/api/login', 
@@ -155,15 +156,17 @@ async function loginUser(){
             {
                 return response.json()
             }
+            else{
             let loginErrorsEl = document.getElementById('login-error');             
             var newErrorEl = document.createElement('p');
             newErrorEl.textContent = "Email or Password incorrect";
             loginErrorsEl.appendChild(newErrorEl)
-        
+            }
         }).then(responseData =>{
-            let uid = responseData.id;
-            setCookie(uid, 7);
+            let uiid = responseData.id;
             console.log(responseData);
+            console.log("uid is " + uiid);
+            setCookie(uiid, 7);
             window.location.href = 'index.html';
         })
  })
@@ -220,7 +223,8 @@ function redirectToLogin() {
     
     if(uid == ''){
         window.location.href = 'login.html';
-    }else{
+    }
+    else{
         submitProject();
     }
 }
@@ -233,14 +237,9 @@ if (window.location.href.includes('register.html')) {
     signupUser()
 }
 
-if (window.location.href.includes('login.html')) {
-    loginUser()
-}
-
-if (window.location.href.includes('createproject.html')) {
+if (window.location.href.includes('createproject.html')){
     redirectToLogin()
 }
-
-if (window.location.href.includes('login.html')) {
-    window.onload = updateNavbar();
+if(document.cookie){
+    updateNavbar()
 }
