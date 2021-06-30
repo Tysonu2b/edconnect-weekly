@@ -99,14 +99,17 @@ function setCookie(cvalue,exdays) {
 async function updateNavbar()
 {
     let uid="";
+    if(document.cookie)
+    {
     document.cookie
     .split(";")
-    .forEach(userId =>{
-        if(userId.startsWith("uid"))
+    .find(userId =>{
+        if(userId.startsWith("uid="))
         {
             uid = userId.split("=")[1];
         }
     })
+}
 
     if(uid !==null){
         let url = "api/users/"+uid;
