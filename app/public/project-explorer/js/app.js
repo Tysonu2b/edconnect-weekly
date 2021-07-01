@@ -111,7 +111,7 @@ async function updateNavbar()
     })
 }
 
-    if(uid !==null){
+    if(uid !==""){
         let url = "api/users/"+uid;
         console.log(url);
         await fetch(url, {
@@ -124,7 +124,7 @@ async function updateNavbar()
         }).then(responseData => {
             let userFirstname = responseData.data.firstname;
             let firstNameEl = document.getElementById("username");
-            firstNameEl.innerHTML = "Hi" + userFirstname;
+            firstNameEl.innerHTML = "Hi " + userFirstname;
 
             //let logOutEl = document.querySelector("logout");
             // logOutEl.innerHTML = "Logout";
@@ -135,9 +135,7 @@ async function updateNavbar()
             // })
         })
     }
-}
-
-
+ }
 
 // //login user
 function loginUser(){
@@ -145,19 +143,24 @@ function loginUser(){
     loginForm.addEventListener('submit', event => {
         event.preventDefault();
         let logObj = {
-            email:  document.getElementById('email').value,
-            password: document.getElementById('password').value,
+            "email":  document.getElementById('userEmail').value,
+            "password": document.getElementById('userPassword').value,
         }
 
-        fetch('/api/login', 
+        fetch("/api/login", 
         {
             headers: {'Content-Type':'application/json'},
             method: 'POST',
             body: JSON.stringify(logObj)
-        }).then(response => {
-            if(response.ok)
+        }).then(responses => {
+            return responses.json()
+        }).then(responseData => {
+            if(responseData.status === "ok")
             {
-                return response.json()
+                let uiid = responseData.data.id;
+                console.log("uid is " + uiid);
+                setCookie(uiid, 7);
+                window.location.href = 'index.html';
             }
             else{
             let loginErrorsEl = document.getElementById('login-error');             
@@ -165,9 +168,9 @@ function loginUser(){
             newErrorEl.textContent = "Email or Password incorrect";
             loginErrorsEl.appendChild(newErrorEl)
             }
-        }).then(responseData =>{
+         })
+            .then(responseData =>{
             let uiid = responseData.id;
-            console.log(responseData);
             console.log("uid is " + uiid);
             setCookie(uiid, 7);
             window.location.href = 'index.html';
