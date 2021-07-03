@@ -114,7 +114,7 @@ async function updateNavbar()
     if(uid !==""){
         let url = "api/users/"+uid;
         console.log(url);
-        await fetch(url, {
+        fetch(url, {
             headers : {
                 'Content-Type':'application/json'
             },
