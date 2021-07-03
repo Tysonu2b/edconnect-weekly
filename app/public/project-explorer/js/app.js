@@ -138,9 +138,9 @@ async function updateNavbar()
  }
 
 // //login user
-function loginUser(){
-    let loginForm = document.getElementById('loginForm');
-    loginForm.addEventListener('submit', event => {
+async function loginUser(){
+    let loginForms = document.getElementById('loginForm');
+    loginForms.addEventListener('submit', event => {
         event.preventDefault();
         let logObj = {
             "email":  document.getElementById("userEmail").value,
@@ -154,8 +154,9 @@ function loginUser(){
             body: JSON.stringify(logObj)
         })
         .then(responseData => {
-            if(responseData.status === "ok")
+            if(responseData.ok)
             {
+                console.log(responseData.status)
                 return responseData.json();
             }
             else{
@@ -236,6 +237,10 @@ if (window.location.href.includes('register.html')) {
     getPrograms();
     getGraduationYear();
     signupUser()
+}
+
+if (window.location.href.includes('login.html')){
+    loginUser()
 }
 
 if (window.location.href.includes('createproject.html')){
