@@ -143,8 +143,8 @@ function loginUser(){
     loginForm.addEventListener('submit', event => {
         event.preventDefault();
         let logObj = {
-            "email":  document.getElementById('userEmail').value,
-            "password": document.getElementById('userPassword').value,
+            "email":  document.getElementById("userEmail").value,
+            "password": document.getElementById("userPassword").value
         }
 
         fetch("/api/login", 
@@ -157,6 +157,7 @@ function loginUser(){
         }).then(responseData => {
             if(responseData.status === "ok")
             {
+                console.log(responseData);
                 let uiid = responseData.data.id;
                 console.log("uid is " + uiid);
                 setCookie(uiid, 7);
@@ -169,12 +170,7 @@ function loginUser(){
             loginErrorsEl.appendChild(newErrorEl)
             }
          })
-            .then(responseData =>{
-            let uiid = responseData.id;
-            console.log("uid is " + uiid);
-            setCookie(uiid, 7);
-            window.location.href = 'index.html';
-        })
+            
  })
 }
 
@@ -246,6 +242,6 @@ if (window.location.href.includes('register.html')) {
 if (window.location.href.includes('createproject.html')){
     redirectToLogin()
 }
-if(document.cookie){
-    updateNavbar()
-}
+// if(document.cookie){
+//     updateNavbar()
+// }

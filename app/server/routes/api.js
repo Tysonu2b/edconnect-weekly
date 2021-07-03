@@ -6,7 +6,6 @@ const User = require("../models/users").User;
 const Users = require("../models/users").Users;
 const Project = require("../models/projects").Project;
 const Projects = require("../models/projects").Projects;
-
 const usersFile = path.join(__dirname, "../users.json");
 const projectsFile = path.join(__dirname, "../projects.json");
 
