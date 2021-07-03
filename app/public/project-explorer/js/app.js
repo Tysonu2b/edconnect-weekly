@@ -152,16 +152,11 @@ function loginUser(){
             headers: {'Content-Type':'application/json'},
             method: 'POST',
             body: JSON.stringify(logObj)
-        }).then(responses => {
-            return responses.json()
-        }).then(responseData => {
+        })
+        .then(responseData => {
             if(responseData.status === "ok")
             {
-                console.log(responseData);
-                let uiid = responseData.data.id;
-                console.log("uid is " + uiid);
-                setCookie(uiid, 7);
-                window.location.href = 'index.html';
+                return responseData.json();
             }
             else{
             let loginErrorsEl = document.getElementById('login-error');             
@@ -169,6 +164,10 @@ function loginUser(){
             newErrorEl.textContent = "Email or Password incorrect";
             loginErrorsEl.appendChild(newErrorEl)
             }
+         }).then(data =>{
+             let uid = data.id['id'];
+             setCookie(uid, 7);
+             window.location.href = 'index.html'
          })
             
  })
