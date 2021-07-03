@@ -166,7 +166,8 @@ async function loginUser(){
             loginErrorsEl.appendChild(newErrorEl)
             }
          }).then(data =>{
-             let uid = data.id['id'];
+             console.log(data)
+             let uid = data.data['id'];
              setCookie(uid, 7);
              window.location.href = 'index.html'
          })
