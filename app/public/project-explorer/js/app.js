@@ -114,7 +114,7 @@ async function updateNavbar()
     if(uid !==""){
         let url = "api/users/"+uid;
         console.log(url);
-        fetch(url, {
+        await fetch(url, {
             headers : {
                 'Content-Type':'application/json'
             },
@@ -123,7 +123,8 @@ async function updateNavbar()
             return response.json();
         }).then(responseData => {
             let userFirstname = responseData.data.firstname;
-            let firstNameEl = document.getElementById("username");
+            console.log(userFirstname);
+            let firstNameEl = document.getElementById("helloUser");
             firstNameEl.innerHTML = "Hi " + userFirstname;
 
             //let logOutEl = document.querySelector("logout");
@@ -167,9 +168,9 @@ async function loginUser(){
             }
          }).then(data =>{
              console.log(data)
-             let uid = data.data['id'];
-             setCookie(uid, 7);
-             window.location.href = 'index.html'
+            let uid = data.data.id;
+            setCookie(uid, 7);
+            window.location.href = 'index.html'
          })
             
  })
@@ -247,6 +248,4 @@ if (window.location.href.includes('login.html')){
 if (window.location.href.includes('createproject.html')){
     redirectToLogin()
 }
-// if(document.cookie){
-//     updateNavbar()
-// }
+window.onload = updateNavbar();
