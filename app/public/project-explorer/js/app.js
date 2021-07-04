@@ -125,7 +125,7 @@ async function updateNavbar()
             let userFirstname = responseData.firstname;
             let firstNameEl = document.getElementById("username");
             firstNameEl.innerHTML = "Hi " + userFirstname;
-            firstNameEl.href = "profile.html"
+            firstNameEl.href = "index.html"
             
             //Update Login to Logout
             let logOutEl = document.getElementById("logout");
@@ -237,7 +237,82 @@ function redirectToLogin() {
     }
 }
 
+//Preview Project
+async function loadProject()
+{    
+    fetch("/api/projects", 
+     {headers: {"Content-Type": "application/json"},
+     method: "GET"
+    }).then(response =>{
+        return response.json();
+    }).then(data =>{
+    for(let i=0; i<=3 ; i++){
+    //Row Showcase
+    let populateProj = document.getElementById("populateProject");
+        
+    //Col-md-3 to section each project to display
+    //Col-Md-3 appended under Row Showcase Class attribute
+    let colmd3 = document.createElement("div");
+    colmd3.classList = "col-md-3";
 
+    let card = document.createElement("div");
+    card.classList = "card";
+    
+   //Project Title Element
+   let projectTitle = document.createElement("h6");
+   projectTitle.classList = "card-title";
+
+   //Author Element
+   let author = document.createElement("p");
+   author.classList = "card-subtitle mb-2";
+
+   //Project Abstract
+   let abstract = document.createElement("p");
+   abstract.classList = "card-text";
+
+   //Tag
+   let tags = document.createElement("a");
+   tags.classList = "card-link";
+    
+    //CardBody Element
+    let cardBody = document.createElement("div");
+    card.classList = "card";
+    
+    //console.log(data)
+    var projectName = data[i].name;
+    projectTitle.innerText = projectName;
+    projectTitle.href = `viewproject.html?id=/${data[i].id}`;
+
+    const authored = data[i].authors;
+    if(authored !== null)
+    {
+        author.innerHTML = authored.join(',');
+    }
+
+    abstract.innerText = data[i].abstract;
+
+    const tagg = data[i].tags;
+    if(tagg !== null)
+    {
+        tags.innerHTML = tagg.join(',');
+    }
+
+    cardBody.appendChild(projectTitle);
+    cardBody.appendChild(author);
+    cardBody.appendChild(abstract);
+    cardBody.appendChild(tags);
+
+    populateProj.appendChild(colmd3); 
+    colmd3.appendChild(card);
+    card.appendChild(cardBody);
+
+    }
+    
+    })
+
+   
+
+}
 
 if (window.location.href.includes('register.html')) {
     getPrograms();
@@ -255,4 +330,9 @@ if (window.location.href.includes('createproject.html')){
 if(document.cookie)
 {
     updateNavbar();
+}
+
+if(document.cookie && window.location.href.includes("index.html"))
+{
+    loadProject();
 }
