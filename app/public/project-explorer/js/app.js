@@ -123,7 +123,7 @@ async function updateNavbar()
             return response.json();
         }).then(responseData => {
             let userFirstname = responseData.firstname;
-            let firstNameEl = document.getElementById("helloUser");
+            let firstNameEl = document.getElementById("username");
             firstNameEl.innerHTML = "Hi " + userFirstname;
             firstNameEl.href = "profile.html"
             
@@ -217,6 +217,8 @@ async function submitProject(){
     })
 }
 
+//Redirect a user to login if they try accessing the create
+//Project without login  in
 function redirectToLogin() {
     let uid = '';
     document.cookie
@@ -225,9 +227,8 @@ function redirectToLogin() {
         if(row.startsWith('uid=')){
          uid = row.split('=')[1];
         }})
-        console.log(uid)
     
-    if(uid == ''){
+    if(uid === ''){
         window.location.href = 'login.html';
     }
     else{
