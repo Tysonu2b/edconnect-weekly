@@ -122,10 +122,9 @@ async function updateNavbar()
         }).then(response =>{
             return response.json();
         }).then(responseData => {
-            let userFirstname = responseData.firstname;
             let firstNameEl = document.getElementById("username");
-            firstNameEl.innerHTML = "Hi " + userFirstname;
-            firstNameEl.href = "index.html"
+            firstNameEl.innerHTML = "Hi " + responseData.firstname;
+            firstNameEl.href = "index.html";
             
             //Update Login to Logout
             let logOutEl = document.getElementById("logout");
