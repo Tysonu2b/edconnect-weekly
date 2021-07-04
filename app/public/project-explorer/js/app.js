@@ -45,8 +45,8 @@ async function signupUser()
     event.preventDefault();
     
     let formObj = {
-    firstName: document.getElementById("firstName").value,
-    lastName: document.getElementById("lastName").value,
+    firstname: document.getElementById("firstNames").value,
+    lastname: document.getElementById("lastNames").value,
     email: document.getElementById("email").value,
     password: document.getElementById("password").value,
     program: document.getElementsByName("program")[0].value,
@@ -114,7 +114,7 @@ async function updateNavbar()
     if(uid !==""){
         //let url = "api/users/"+uid;
         //console.log(url);
-        await fetch(`api/users/${uid}`, {
+        await fetch(`/api/users/${uid}`, {
             headers : {
                 'Content-Type':'application/json'
             },
@@ -122,18 +122,20 @@ async function updateNavbar()
         }).then(response =>{
             return response.json();
         }).then(responseData => {
-            let userFirstname = responseData.data.firstname;
-            console.log(userFirstname);
+            let userFirstname = responseData.firstname;
             let firstNameEl = document.getElementById("helloUser");
             firstNameEl.innerHTML = "Hi " + userFirstname;
-
-            //let logOutEl = document.querySelector("logout");
-            // logOutEl.innerHTML = "Logout";
-            // logoutEl.addEventListener('click', e =>{
-            //     e.preventDefault()
-            //     document.cookie = "" //clear the cookie
-            //     window.location.href = 'index.html';
-            // })
+            firstNameEl.href = "profile.html"
+            
+            //Update Login to Logout
+            let logOutEl = document.getElementById("logout");
+            logOutEl.innerHTML = "Logout";
+            logOutEl.href = "index.html"
+            logOutEl.addEventListener('click', e =>{
+                e.preventDefault();
+                document.cookie ='uid=; expires=Wed, 19 May 2021 00:00:00 UTC; path=/;';
+                window.location.href='index.html';
+            })
         })
     }
  }
@@ -170,7 +172,7 @@ async function loginUser(){
              console.log(data)
             let uid = data.data.id;
             setCookie(uid, 7);
-            window.location.href = 'index.html'
+            window.location.href = 'profile.html'
          })
             
  })
@@ -179,17 +181,17 @@ async function loginUser(){
 //submit Project
 async function submitProject(){
     let projectFormEl = document.getElementById("createProjectForm")
-    projectFormEl.addEventListener("click", event =>{
+    projectFormEl.addEventListener("submit", event =>{
         event.preventDefault();
 
         let projectInput = {
-            "name": document.getElementById("projectName"),
-            "abstract": document.getElementById("abstract"),
+            "name": document.getElementById("projectName").value,
+            "abstract": document.getElementById("abstract").value,
             "authors": document.getElementById("author").value.split(","),
             "tags": document.getElementById("tags").value.split(",")
         }
 
-        fetch("/api/project", {
+        fetch("/api/projects", {
             headers: {
                 'Content-Type':'application/json'
             },
@@ -248,4 +250,7 @@ if (window.location.href.includes('login.html')){
 if (window.location.href.includes('createproject.html')){
     redirectToLogin()
 }
-window.onload = updateNavbar();
+if(document.cookie)
+{
+    updateNavbar();
+}
