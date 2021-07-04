@@ -124,8 +124,7 @@ async function updateNavbar()
         }).then(responseData => {
             let firstNameEl = document.getElementById("username");
             firstNameEl.innerHTML = "Hi " + responseData.firstname;
-            firstNameEl.href = "index.html";
-            
+                        
             //Update Login to Logout
             let logOutEl = document.getElementById("logout");
             logOutEl.innerHTML = "Logout";
