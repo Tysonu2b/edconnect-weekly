@@ -165,6 +165,7 @@ async function loginUser(){
             else{
             let loginErrorsEl = document.getElementById('login-error');             
             var newErrorEl = document.createElement('p');
+            newErrorEl.classList = "alert alert-danger"
             newErrorEl.textContent = "Email or Password incorrect";
             loginErrorsEl.appendChild(newErrorEl)
             }
