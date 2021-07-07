@@ -171,7 +171,7 @@ async function loginUser(){
              console.log(data)
             let uid = data.data.id;
             setCookie(uid, 7);
-            window.location.href = 'profile.html'
+            window.location.href = 'index.html'
          })
             
  })
