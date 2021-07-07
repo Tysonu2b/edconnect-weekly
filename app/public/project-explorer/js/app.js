@@ -45,17 +45,19 @@ async function signupUser()
     event.preventDefault();
     
     let formObj = {
-    firstname: document.getElementById("firstNames").value,
-    lastname: document.getElementById("lastNames").value,
-    email: document.getElementById("email").value,
-    password: document.getElementById("password").value,
-    program: document.getElementsByName("program")[0].value,
-    matricNumber: document.getElementById("matricNumber").value,
-    graduationYear: document.getElementsByName("graduationYear")[0].value
+    "firstname": document.getElementById("firstNames").value,
+    "lastname": document.getElementById("lastNames").value,
+    "email": document.getElementById("email").value,
+    "password": document.getElementById("password").value,
+    "matricNumber": document.getElementById("matricNumber").value,
+    "program": document.getElementsByName("program")[0].value,
+    "graduationYear": document.getElementsByName("graduationYear")[0].value
     };
 
     fetch('/api/register', {
-        headers: {'Content-Type': 'application/json'}, 
+        headers: {
+            'Content-Type': 'application/json'
+        }, 
         method: 'POST', 
         body: JSON.stringify(formObj)
     }).then(response => {
@@ -63,13 +65,13 @@ async function signupUser()
     })
     .then(responseData => {
         if(responseData.status === 'ok')
-        {
+        { 
             let userId = responseData.data.id;
             setCookie(userId, 5);
             window.location.href = 'index.html';
         }
         else
-            console.log(responseData)
+        {
             let err = responseData.errors;
             let errorDiv = document.getElementById('error-alert');
             errorDiv.classList.add("alert-danger");
@@ -78,6 +80,7 @@ async function signupUser()
                 errP.innerText = err[i];          
                 errorDiv.appendChild(errP);
             } 
+        }
     }).catch(error =>{
         console.log('error:', error)
     })
@@ -91,11 +94,10 @@ function setCookie(cvalue,exdays) {
     var expires = "expires=" + d.toGMTString();
     document.cookie = "";
     document.cookie = "uid=" + cvalue + ";" + expires + ";path=/";
-    console.log("document.cookie",document.cookie); // To view the cookie using developer tool in the browser
+    console.log("document.cookie",document.cookie);
 }
 
-//Get Username using the uid from the cookie and updating 
-//the index page with logout and 'Hi {firstname}'
+//Updating the Navbar
 async function updateNavbar()
 {
     let uid="";
@@ -112,23 +114,23 @@ async function updateNavbar()
 }
 
     if(uid !==""){
-        //let url = "api/users/"+uid;
-        //console.log(url);
         await fetch(`/api/users/${uid}`, {
             headers : {
                 'Content-Type':'application/json'
             },
             method: 'GET'
         }).then(response =>{
-            return response.json();
+            return response.json()
         }).then(responseData => {
+            console.log(responseData);
             let firstNameEl = document.getElementById("username");
+            let logOutEl = document.getElementById("logout");
             firstNameEl.innerHTML = `Hi, ${responseData.firstname}`;
+            firstNameEl.href = "index.html"
                         
             //Update Login to Logout
-            let logOutEl = document.getElementById("logout");
             logOutEl.innerHTML = "Logout";
-            logOutEl.href = "index.html"
+            logOutEl.href = "#"
             logOutEl.addEventListener('click', e =>{
                 e.preventDefault();
                 document.cookie ='uid=; expires=Wed, 19 May 2021 00:00:00 UTC; path=/;';
@@ -138,7 +140,11 @@ async function updateNavbar()
     }
  }
 
-// //login user
+
+//Get Username using the uid from the cookie and updating 
+//the index page with logout and 'Hi {firstname}'
+
+//login user
 async function loginUser(){
     let loginForms = document.getElementById('loginForm');
     loginForms.addEventListener('submit', event => {
@@ -157,7 +163,6 @@ async function loginUser(){
         .then(responseData => {
             if(responseData.ok)
             {
-                console.log(responseData.status)
                 return responseData.json();
             }
             else{
@@ -178,139 +183,140 @@ async function loginUser(){
 }
 
 //submit Project
-async function submitProject(){
-    let projectFormEl = document.getElementById("createProjectForm")
-    projectFormEl.addEventListener("submit", event =>{
-        event.preventDefault();
+// async function submitProject(){
+//     let projectFormEl = document.getElementById("createProjectForm")
+//     projectFormEl.addEventListener("submit", event =>{
+//         event.preventDefault();
 
-        let projectInput = {
-            "name": document.getElementById("projectName").value,
-            "abstract": document.getElementById("abstract").value,
-            "authors": document.getElementById("author").value.split(","),
-            "tags": document.getElementById("tags").value.split(",")
-        }
+//         let projectInput = {
+//             "name": document.getElementById("projectName").value,
+//             "abstract": document.getElementById("abstract").value,
+//             "authors": document.getElementById("author").value.split(","),
+//             "tags": document.getElementById("tags").value.split(",")
+//         }
 
-        fetch("/api/projects", {
-            headers: {
-                'Content-Type':'application/json'
-            },
-            method: 'POST',
-            body: JSON.stringify(projectInput)
-        }).then(response =>{
-            return response.json()
-        }).then(responseData => {
-            console.log(responseData)
-            if(responseData.status === "ok")
-            {
-                window.location.href = "index.html";
-            }
-            let submitErrorEl = document.getElementById("error-alert");
-            let responseDataError = responseData.errors;
-            for(let i=0; i<responseDataError.length; i++){
-                let errorDiv = document.createElement('div');
-                errorDiv.classList = "alert alert-danger";
-                errorDiv.textContent = responseDataError[i];
-                submitErrorEl.appendChild(errorDiv)
-            }
-        })
-    })
-}
+//         fetch("/api/projects", {
+//             headers: {
+//                 'Content-Type':'application/json'
+//             },
+//             method: 'POST',
+//             body: JSON.stringify(projectInput)
+//         }).then(response =>{
+//             return response.json()
+//         }).then(responseData => {
+//             console.log(responseData)
+//             if(responseData.status === "ok")
+//             {
+//                 window.location.href = "index.html";
+//             }
+//             let submitErrorEl = document.getElementById("error-alert");
+//             let responseDataError = responseData.errors;
+//             for(let i=0; i<responseDataError.length; i++){
+//                 let errorDiv = document.createElement('div');
+//                 errorDiv.classList = "alert alert-danger";
+//                 errorDiv.textContent = responseDataError[i];
+//                 submitErrorEl.appendChild(errorDiv)
+//             }
+//         })
+//     })
+// }
 
 //Redirect a user to login if they try accessing the create
 //Project without login  in
-function redirectToLogin() {
-    let uid = '';
-    document.cookie
-    .split(';')
-    .filter(row => {
-        if(row.startsWith('uid=')){
-         uid = row.split('=')[1];
-        }})
+// function redirectToLogin() {
+//     let uid = '';
+//     document.cookie
+//     .split(';')
+//     .filter(row => {
+//         if(row.startsWith('uid=')){
+//          uid = row.split('=')[1];
+//         }})
     
-    if(uid === ''){
-        window.location.href = 'login.html';
-    }
-    else{
-        submitProject();
-    }
-}
+//     if(uid === ''){
+//         window.location.href = 'login.html';
+//     }
+//     else{
+//         submitProject();
+//     }
+// }
 
 //Preview Project
-async function loadProject()
-{    
-    fetch("/api/projects", 
-     {headers: {"Content-Type": "application/json"},
-     method: "GET"
-    }).then(response =>{
-        return response.json();
-    }).then(data =>{
-    for(let i=0; i<=3 ; i++){
-    //Row Showcase
-    let populateProj = document.getElementById("populateProject");
+// async function loadProject()
+// {    
+//     fetch("/api/projects", 
+//      {headers: {"Content-Type": "application/json"},
+//      method: "GET"
+//     }).then(response =>{
+//         return response.json();
+//     }).then(data =>{
+//     for(let i=0; i<=3 ; i++){
+//     //Row Showcase
+//     let populateProj = document.getElementById("populateProject");
         
-    //Col-md-3 to section each project to display
-    //Col-Md-3 appended under Row Showcase Class attribute
-    let colmd3 = document.createElement("div");
-    colmd3.classList = "col-md-3";
+//     //Col-md-3 to section each project to display
+//     //Col-Md-3 appended under Row Showcase Class attribute
+//     let colmd3 = document.createElement("div");
+//     colmd3.classList = "col-md-3";
 
-    let card = document.createElement("div");
-    card.classList = "card";
+//     let card = document.createElement("div");
+//     card.classList = "card";
     
-   //Project Title Element
-   let projectTitle = document.createElement("h6");
-   projectTitle.classList = "card-title";
+//    //Project Title Element
+//    let projectTitle = document.createElement("h6");
+//    projectTitle.classList = "card-title";
 
-   //Author Element
-   let author = document.createElement("p");
-   author.classList = "card-subtitle mb-2";
+//    //Author Element
+//    let author = document.createElement("p");
+//    author.classList = "card-subtitle mb-2";
 
-   //Project Abstract
-   let abstract = document.createElement("p");
-   abstract.classList = "card-text";
+//    //Project Abstract
+//    let abstract = document.createElement("p");
+//    abstract.classList = "card-text";
 
-   //Tag
-   let tags = document.createElement("a");
-   tags.classList = "card-link";
+//    //Tag
+//    let tags = document.createElement("a");
+//    tags.classList = "card-link";
     
-    //CardBody Element
-    let cardBody = document.createElement("div");
-    card.classList = "card";
+//     //CardBody Element
+//     let cardBody = document.createElement("div");
+//     card.classList = "card";
     
-    //console.log(data)
-    var projectName = data[i].name;
-    projectTitle.innerText = projectName;
-    projectTitle.href = `viewproject.html?id=/${data[i].id}`;
+//     //console.log(data)
+//     var projectName = data[i].name;
+//     projectTitle.innerText = projectName;
+//     projectTitle.href = `viewproject.html?id=/${data[i].id}`;
 
-    const authored = data[i].authors;
-    if(authored !== null)
-    {
-        author.innerHTML = authored.join(',');
-    }
+//     const authored = data[i].authors;
+//     if(authored !== null)
+//     {
+//         author.innerHTML = authored.join(',');
+//     }
 
-    abstract.innerText = data[i].abstract;
+//     abstract.innerText = data[i].abstract;
 
-    const tagg = data[i].tags;
-    if(tagg !== null)
-    {
-        tags.innerHTML = tagg.join(',');
-    }
+//     const tagg = data[i].tags;
+//     if(tagg !== null)
+//     {
+//         tags.innerHTML = tagg.join(',');
+//     }
 
-    cardBody.appendChild(projectTitle);
-    cardBody.appendChild(author);
-    cardBody.appendChild(abstract);
-    cardBody.appendChild(tags);
+//     cardBody.appendChild(projectTitle);
+//     cardBody.appendChild(author);
+//     cardBody.appendChild(abstract);
+//     cardBody.appendChild(tags);
 
-    populateProj.appendChild(colmd3); 
-    colmd3.appendChild(card);
-    card.appendChild(cardBody);
+//     populateProj.appendChild(colmd3); 
+//     colmd3.appendChild(card);
+//     card.appendChild(cardBody);
 
-    }
+//     }
     
-    })
+//     })
 
-   
+// }
 
-}
+
+window.onload = updateNavbar()
 
 if (window.location.href.includes('register.html')) {
     getPrograms();
@@ -318,19 +324,6 @@ if (window.location.href.includes('register.html')) {
     signupUser()
 }
 
-if (window.location.href.includes('login.html')){
-    loginUser()
-}
-
-if (window.location.href.includes('createproject.html')){
-    redirectToLogin()
-}
-if(document.cookie)
-{
-    updateNavbar();
-}
-
-if(document.cookie && window.location.href.includes("index.html"))
-{
-    loadProject();
+if (window.location.href.includes("login.html")){
+    loginUser();
 }
