@@ -41,10 +41,9 @@ class Users extends DataModel {
             {
                 return this.data[i];
             }
-            else
-                return null;
+               
         }
-
+        return null;
     }
 
     getByMatricNumber(matricNumber) {

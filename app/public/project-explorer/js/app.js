@@ -141,7 +141,7 @@ async function updateNavbar()
  }
 
 
-//Get Username using the uid from the cookie and updating 
+//Get User's first name using the uid value from the cookie and updating 
 //the index page with logout and 'Hi {firstname}'
 
 //login user
