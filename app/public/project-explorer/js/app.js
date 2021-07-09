@@ -331,3 +331,7 @@ if (window.location.href.includes("login.html")){
 if (window.location.href.includes("index.html")){
     loadProject();
 }
+
+if (window.location.href.includes("createproject.html")){
+    redirectToLogin();
+}
