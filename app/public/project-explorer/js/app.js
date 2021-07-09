@@ -1,3 +1,5 @@
+
+
 async function getPrograms()
 {
 let listOfProgram = document.getElementById("program") //A click event will be attached to this variable.
@@ -122,7 +124,7 @@ async function updateNavbar()
         }).then(response =>{
             return response.json()
         }).then(responseData => {
-            console.log(responseData);
+            // console.log(responseData);
             let firstNameEl = document.getElementById("username");
             let logOutEl = document.getElementById("logout");
             firstNameEl.innerHTML = `Hi, ${responseData.firstname}`;
@@ -280,11 +282,12 @@ async function loadProject()
     //CardBody Element
     let cardBody = document.createElement("div");
     card.classList = "card";
-    
-    //console.log(data)
-    var projectName = data[i].name;
+    let projectName = data[i].name;
     projectTitle.innerText = projectName;
-    projectTitle.href = `viewproject.html?id=/${data[i].id}`;
+    let newName = document.createElement("a")
+    newName.href = "viewproject.html?id=" + `${data[i].id}`;
+    newName.innerText = "View Project"
+    //projectTitle.innerHTML = '<a id=viewid href=viewproject.html?id=' + `${data[i].id}` + '> ' + '</a>'
 
     const authored = data[i].authors;
     if(authored !== null)
@@ -301,6 +304,7 @@ async function loadProject()
     }
 
     cardBody.appendChild(projectTitle);
+    cardBody.appendChild(newName);
     cardBody.appendChild(author);
     cardBody.appendChild(abstract);
     cardBody.appendChild(tags);
@@ -314,6 +318,66 @@ async function loadProject()
     })
 
 }
+
+
+async function updateViewProject(){
+
+    let projectName = document.getElementById("project_name")
+    let projectCreatedBy = document.getElementById("project_author")
+    let projectAbstract = document.getElementById("project_abstract")
+    let projectAuthors = document.getElementById("project_authors")
+    let projectTag = document.getElementById("project_tags")
+
+    const params = new URLSearchParams(window.location.search)
+    let uid = params.toString().split("=")[1]; //Split the value of the search string at = and take element 1 of the returned array
+    let url = "/api/projects/"+uid;
+    console.log(url);
+    
+    await fetch(url,{
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        method: 'GET'
+    }).then(response=> {
+        return response.json()
+    }).then(data =>{
+        console.log(data)
+         //Loop through the authors array to get authors for the uploaded project
+        let authorArray = data.authors;
+        for(let i=0; i<authorArray.length; i++)
+        {
+            let authorEl = document.createElement("p");
+            authorEl.classList = "card-text";
+            authorEl.innerText = authorArray[i];
+            projectAuthors.appendChild(authorEl);
+        }
+        projectName.innerText = data.name;
+        projectAbstract.innerText = data.abstract;
+
+        //Loop through the tag array to get tags for the uploaded project
+        let tagArray = data.tags;
+        for(let i=0; i<tagArray.length; i++)
+        {
+            let tags = document.createElement("a");
+            tags.href = "#";
+            tags.innerText = tagArray[i];
+            projectTag.appendChild(tags)
+        }
+        let uri = data.createdBy
+        fetch("/api/users/"+data.createdBy,
+        {headers:
+            {"Application-Type" : "application/json"},
+        method: "GET"
+        }).then(response =>{
+            return response.json()
+        }).then(datas =>{
+            console.log(datas)
+            projectCreatedBy.innerText = datas.firstname + " " + datas.lastname;
+        })
+        
+    })
+
+    }    
 
 
 window.onload = updateNavbar()
@@ -334,4 +398,8 @@ if (window.location.href.includes("index.html")){
 
 if (window.location.href.includes("createproject.html")){
     redirectToLogin();
+}
+
+if (window.location.href.includes('viewproject.html')){
+    updateViewProject(); 
 }

@@ -19,28 +19,17 @@
             <a id="logout" class="nav-link" href="register.html">Sign up</a>
             <a id="username"class="nav-link" href="login.html">Login</a>
         </div>
-      
-       
-       
-        <!-- <ul class="navbar-nav mr-6">
-            <li class="nav-item">
-                <a class="nav-link" href="login.html">Login</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="register.html">Sign up</a>
-            </li>
-        </ul> -->
     
     </nav> <br>
     <main>
 
         <section>
-            <h5 class="container">Project 1</h5>      
+            <h5 id="project_name" class="container">Project 1</h5>      
             <div class="container bg-light p-3">  
                     <div class="row">
                         <div class="col-md-3">
                             <h7> Created by</h7> <br>
-                            <h7> Ade Chris</h7>
+                            <h7 id="project_author"> Ade Chris</h7>
                         </div>
             
                         <div class="col-md-3">
@@ -53,7 +42,7 @@
                             <h7> 2020-08-30 </h7>
                         </div>
                         <div class="col-md-3 d-flex justify-content-end">
-                        <a  href="editproject.html" class="btn btn-primary">Edit Project</button>
+                        <a  href="editproject.html" class="btn btn-primary">Edit Project</a>
                         </div>
                         </div>
            </div>
@@ -66,11 +55,7 @@
         <div class="col-md-6">
         <strong> Project Abstract </strong>
         <hr> 
-        <p>Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print,
-            graphic or web designs. The passage is attributed to an unknown typesetter in the 15th
-            century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for
-            use in a type specimen book.
-        </p>
+        <p id="project_abstract"></p>
 
         <label class="form-label"><small>Comments</small></label>
         <textarea class="form-control" type="text" placeholder="Leave a comment" name="abstract">
@@ -92,8 +77,12 @@
                 </div>
                 <div class="card-body">
                   <!-- <h5 class="card-title">Special title treatment</h5> -->
-                  <p class="card-text">Ade Chris</p>
-                <div class="card-footer"><a href="#">#web</a></div>
+                  <div id="project_authors">
+                  <!-- <p class="card-text">Ade Chris</p> -->
+                  </div><br>
+                <div id="project_tags" class="card-footer">
+                    <!-- <a href="#">#web</a> -->
+                </div>
                 </div>
               </div>
 
