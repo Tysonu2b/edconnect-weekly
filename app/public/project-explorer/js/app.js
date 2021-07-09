@@ -183,137 +183,137 @@ async function loginUser(){
 }
 
 //submit Project
-// async function submitProject(){
-//     let projectFormEl = document.getElementById("createProjectForm")
-//     projectFormEl.addEventListener("submit", event =>{
-//         event.preventDefault();
+async function submitProject(){
+    let projectFormEl = document.getElementById("createProjectForm")
+    projectFormEl.addEventListener("submit", event =>{
+        event.preventDefault();
 
-//         let projectInput = {
-//             "name": document.getElementById("projectName").value,
-//             "abstract": document.getElementById("abstract").value,
-//             "authors": document.getElementById("author").value.split(","),
-//             "tags": document.getElementById("tags").value.split(",")
-//         }
+        let projectInput = {
+            "name": document.getElementById("projectName").value,
+            "abstract": document.getElementById("abstract").value,
+            "authors": document.getElementById("author").value.split(","),
+            "tags": document.getElementById("tags").value.split(",")
+        }
 
-//         fetch("/api/projects", {
-//             headers: {
-//                 'Content-Type':'application/json'
-//             },
-//             method: 'POST',
-//             body: JSON.stringify(projectInput)
-//         }).then(response =>{
-//             return response.json()
-//         }).then(responseData => {
-//             console.log(responseData)
-//             if(responseData.status === "ok")
-//             {
-//                 window.location.href = "index.html";
-//             }
-//             let submitErrorEl = document.getElementById("error-alert");
-//             let responseDataError = responseData.errors;
-//             for(let i=0; i<responseDataError.length; i++){
-//                 let errorDiv = document.createElement('div');
-//                 errorDiv.classList = "alert alert-danger";
-//                 errorDiv.textContent = responseDataError[i];
-//                 submitErrorEl.appendChild(errorDiv)
-//             }
-//         })
-//     })
-// }
+        fetch("/api/projects", {
+            headers: {
+                'Content-Type':'application/json'
+            },
+            method: 'POST',
+            body: JSON.stringify(projectInput)
+        }).then(response =>{
+            return response.json()
+        }).then(responseData => {
+            console.log(responseData)
+            if(responseData.status === "ok")
+            {
+                window.location.href = "index.html";
+            }
+            let submitErrorEl = document.getElementById("error-alert");
+            let responseDataError = responseData.errors;
+            for(let i=0; i<responseDataError.length; i++){
+                let errorDiv = document.createElement('div');
+                errorDiv.classList = "alert alert-danger";
+                errorDiv.textContent = responseDataError[i];
+                submitErrorEl.appendChild(errorDiv)
+            }
+        })
+    })
+}
 
 //Redirect a user to login if they try accessing the create
 //Project without login  in
-// function redirectToLogin() {
-//     let uid = '';
-//     document.cookie
-//     .split(';')
-//     .filter(row => {
-//         if(row.startsWith('uid=')){
-//          uid = row.split('=')[1];
-//         }})
+function redirectToLogin() {
+    let uid = '';
+    document.cookie
+    .split(';')
+    .filter(row => {
+        if(row.startsWith('uid=')){
+         uid = row.split('=')[1];
+        }})
     
-//     if(uid === ''){
-//         window.location.href = 'login.html';
-//     }
-//     else{
-//         submitProject();
-//     }
-// }
+    if(uid === ''){
+        window.location.href = 'login.html';
+    }
+    else{
+        submitProject();
+    }
+}
 
 //Preview Project
-// async function loadProject()
-// {    
-//     fetch("/api/projects", 
-//      {headers: {"Content-Type": "application/json"},
-//      method: "GET"
-//     }).then(response =>{
-//         return response.json();
-//     }).then(data =>{
-//     for(let i=0; i<=3 ; i++){
-//     //Row Showcase
-//     let populateProj = document.getElementById("populateProject");
+async function loadProject()
+{    
+    fetch("/api/projects", 
+     {headers: {"Content-Type": "application/json"},
+     method: "GET"
+    }).then(response =>{
+        return response.json();
+    }).then(data =>{
+    for(let i=0; i<=3 ; i++){
+    //Row Showcase
+    let populateProj = document.getElementById("populateProject");
         
-//     //Col-md-3 to section each project to display
-//     //Col-Md-3 appended under Row Showcase Class attribute
-//     let colmd3 = document.createElement("div");
-//     colmd3.classList = "col-md-3";
+    //Col-md-3 to section each project to display
+    //Col-Md-3 appended under Row Showcase Class attribute
+    let colmd3 = document.createElement("div");
+    colmd3.classList = "col-md-3";
 
-//     let card = document.createElement("div");
-//     card.classList = "card";
+    let card = document.createElement("div");
+    card.classList = "card";
     
-//    //Project Title Element
-//    let projectTitle = document.createElement("h6");
-//    projectTitle.classList = "card-title";
+   //Project Title Element
+   let projectTitle = document.createElement("h6");
+   projectTitle.classList = "card-title";
 
-//    //Author Element
-//    let author = document.createElement("p");
-//    author.classList = "card-subtitle mb-2";
+   //Author Element
+   let author = document.createElement("p");
+   author.classList = "card-subtitle mb-2";
 
-//    //Project Abstract
-//    let abstract = document.createElement("p");
-//    abstract.classList = "card-text";
+   //Project Abstract
+   let abstract = document.createElement("p");
+   abstract.classList = "card-text";
 
-//    //Tag
-//    let tags = document.createElement("a");
-//    tags.classList = "card-link";
+   //Tag
+   let tags = document.createElement("a");
+   tags.classList = "card-link";
     
-//     //CardBody Element
-//     let cardBody = document.createElement("div");
-//     card.classList = "card";
+    //CardBody Element
+    let cardBody = document.createElement("div");
+    card.classList = "card";
     
-//     //console.log(data)
-//     var projectName = data[i].name;
-//     projectTitle.innerText = projectName;
-//     projectTitle.href = `viewproject.html?id=/${data[i].id}`;
+    //console.log(data)
+    var projectName = data[i].name;
+    projectTitle.innerText = projectName;
+    projectTitle.href = `viewproject.html?id=/${data[i].id}`;
 
-//     const authored = data[i].authors;
-//     if(authored !== null)
-//     {
-//         author.innerHTML = authored.join(',');
-//     }
+    const authored = data[i].authors;
+    if(authored !== null)
+    {
+        author.innerHTML = authored.join(',');
+    }
 
-//     abstract.innerText = data[i].abstract;
+    abstract.innerText = data[i].abstract;
 
-//     const tagg = data[i].tags;
-//     if(tagg !== null)
-//     {
-//         tags.innerHTML = tagg.join(',');
-//     }
+    const tagg = data[i].tags;
+    if(tagg !== null)
+    {
+        tags.innerHTML = tagg.join(',');
+    }
 
-//     cardBody.appendChild(projectTitle);
-//     cardBody.appendChild(author);
-//     cardBody.appendChild(abstract);
-//     cardBody.appendChild(tags);
+    cardBody.appendChild(projectTitle);
+    cardBody.appendChild(author);
+    cardBody.appendChild(abstract);
+    cardBody.appendChild(tags);
 
-//     populateProj.appendChild(colmd3); 
-//     colmd3.appendChild(card);
-//     card.appendChild(cardBody);
+    populateProj.appendChild(colmd3); 
+    colmd3.appendChild(card);
+    card.appendChild(cardBody);
 
-//     }
+    }
     
-//     })
+    })
 
-// }
+}
 
 
 window.onload = updateNavbar()
@@ -326,4 +326,8 @@ if (window.location.href.includes('register.html')) {
 
 if (window.location.href.includes("login.html")){
     loginUser();
+}
+
+if (window.location.href.includes("index.html")){
+    loadProject();
 }
